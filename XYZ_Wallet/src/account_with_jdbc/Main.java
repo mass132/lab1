@@ -1,6 +1,8 @@
-package account;
+package account_with_jdbc;
 
 import java.util.Scanner;
+
+import account_with_jdbc.Account;
 
 public class Main {
 

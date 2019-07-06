@@ -1,4 +1,4 @@
-package account;
+package account_with_collections;
 
 import java.util.Date;
 import java.util.HashMap;

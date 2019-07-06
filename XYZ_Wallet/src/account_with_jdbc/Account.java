@@ -1,4 +1,4 @@
-package account;
+package account_with_jdbc;
 
 import java.util.ArrayList;
 import java.util.HashMap;

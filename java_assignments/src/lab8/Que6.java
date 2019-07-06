@@ -1,38 +1,34 @@
 package lab8;
 
 import java.text.ParseException;
-import java.time.Duration;
-import java.util.Calendar;
-import java.util.StringTokenizer;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Que6 {
 	/*
 	 * Create a method to accept date and print the duration in days, months and
 	 * years with regards to current system date.
 	 */
-	public static void getDuration(String dateString) throws ParseException {
-		StringTokenizer st = new StringTokenizer(dateString, "/");
-		int day = Integer.parseInt(st.nextToken());
-		int month = Integer.parseInt(st.nextToken());
-		int year = Integer.parseInt(st.nextToken());
-		Calendar today = Calendar.getInstance();
-		Calendar date = new Calendar.Builder().setDate(year, month, day).build();
-		long todayDate = today.getTimeInMillis();
-		long givenDate = date.getTimeInMillis();
-		long diff = todayDate - givenDate;
-		long days = Duration.ofMillis(diff).toDays();
-		long years = days / 365;
-		days = days % 365;
-		long months = days / 30;
-		days = days % 30;
-		System.out.println("Duration is : ");
-		System.out.print(years + " years, ");
-		System.out.print(months + " months, ");
-		System.out.print(days + " days ");
+	public static void getDuration(String dateString) throws ParseException { 
+		/*
+		 * Accepts date in DD/MM/YYYY format
+		 */
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate date = LocalDate.parse(dateString,dtf);
+		LocalDate today = LocalDate.now();
+		Period period = Period.between(date, today);
+		System.out.print("Duration is "+ period.getYears()+" years, "+
+		period.getMonths()+" months, "+period.getDays()+" days");
 	}
 
 	public static void main(String[] args) throws ParseException {
-		Que6.getDuration("24/12/1997");
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter date in \"DD/MM/YYYY\" format eg. 25/08/2018.");
+		String dob = scan.nextLine();
+		Que6.getDuration(dob);
+		scan.close();
 
 	}
 
