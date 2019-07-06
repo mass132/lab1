@@ -1,0 +1,31 @@
+DDL -> create,alter,drop,truncate,rename (auto commited)
+DML -> insert,update,delete 
+DRL -> select
+DCL ->grant,revoke
+TCL -> commit,rollback,savepoint
+
+
+
+
+create user : create user username identified by password;
+grant permission : grant connect,resource to poonsahu;
+to connect : conn username/password
+create table : create table table_name(col_name datatype(size),...);
+copy table including data : create table table_name as select * from existing_table;
+copy table excluding data : create table table_name as select * from existing_table where 1=2;
+table structure description : desc table_name;
+add more column : alter table table_name add column_name datatype(size);
+drop a column : alter table table_name drop column_name;
+rename column : alter table table_name rename  column old_name to new_name;
+modify datatype of a column : alter table table_name modify col_name new_datatype(size);
+rename a table : rename old_name to new_name;
+insert into a table : insert into table_name values(value1,value2,......);
+clear table : truncate table table_name;
+drop table : drop table table_name;
+delete rows : delete table_name where [condition]
+update rows : update employee set col_name=value where [condition]
+delete duplicate record :  delete from employee where eid in(select eid from employee group by eid having count(*) > 1);
+grant permission to user : grant [permissions] on table_name to user_name;
+revoke permission from user : revoke [permissions] on table_name from user_name;
+
+Constraints:
