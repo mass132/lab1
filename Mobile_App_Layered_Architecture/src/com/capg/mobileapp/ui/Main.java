@@ -51,7 +51,9 @@ public class Main {
 				catch (AccountNotFoundException e) {
 					System.out.println(e.getMessage());
 				}
-				
+				catch (Exception e) {
+					System.out.println("Something went wrong!");
+				}
 				break;
 			case 2:
 				System.out.println("Exiting....");

@@ -2,33 +2,9 @@ package com.capg.wallet.ui;
 
 import java.util.Scanner;
 
-import account_with_jdbc.Account;
-
 public class Main {
-
-	public static void initialize() {
-		Account acc1 = new Account();
-		acc1.createAccount("poonam", "7897894561");
-		acc1.setBalance(5000);
-		acc1.withdraw(500);
-		acc1.deposit(5000);
-		Account acc2 = new Account();
-		acc2.createAccount("raj", "7136484655");
-		acc2.setBalance(4856);
-		acc2.withdraw(1000);
-		acc2.deposit(5000);
-		acc1.fundTransfer(2, 520);
-		acc2.fundTransfer(1, 100);
-
-	}
-
-	@SuppressWarnings({ "unused", "resource" })
-	public static void runProgram() {
-		long accNum;
-		double amount;
-		long accNum_second;
-		Scanner scan;
-
+	private void runApp() {
+		boolean run = true;
 		while (true) {
 			scan = new Scanner(System.in);
 			System.out.println(
