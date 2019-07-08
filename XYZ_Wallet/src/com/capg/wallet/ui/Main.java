@@ -2,13 +2,19 @@ package com.capg.wallet.ui;
 
 import java.util.Scanner;
 
+import com.capg.wallet.services.AccountServiceInterface;
+
 public class Main {
+	private void showMenu()
+	{
+		System.out.println(
+				"XYZ Wallet\n***************************************************\n1.\tCreate Account\n2.\tDeposit\n3.\tWithdraw\n4.\tFund Transfer\n5.\tPrint Transaction\n6.\tExit\nPlease enter your choice : ");
+	}
 	private void runApp() {
+		Scanner scan = new Scanner(System.in);
 		boolean run = true;
-		while (true) {
-			scan = new Scanner(System.in);
-			System.out.println(
-					"XYZ Wallet\n***************************************************\n1.\tCreate Account\n2.\tDeposit\n3.\tWithdraw\n4.\tFund Transfer\n5.\tPrint Transaction\n6.\tExit\nPlease enter your choice : ");
+		while (run) {
+			showMenu();
 			int choice = scan.nextInt();
 			switch (choice) {
 			case 1:
@@ -16,8 +22,8 @@ public class Main {
 				String name = scan.next();
 				name += scan.nextLine().trim();
 				System.out.println("Enter mobile number : ");
-				String mobile = scan.nextLine().trim();
-				Account temp_account = new Account();
+				String mobile = scan.next().trim();
+				AccountServiceInterface accountService = getAccountService();
 				if (temp_account.createAccount(name, mobile)) {
 					System.out.println("Account created !\n");
 					System.out.println(temp_account);
