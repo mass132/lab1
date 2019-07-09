@@ -123,7 +123,8 @@ public class WalletServiceImpl implements WalletService {
 	public void printTransactions(long accountNum, String password)
 			throws AccountNotFoundException, IncorrectPasswordException {
 		WalletDao walletDao = getWalletDao();
-		System.out.println("Transaction details for account number " + accountNum + " : \n");
+		System.out.println("\nTransaction details for account number " + accountNum + " :");
+		System.out.printf("%14s\t%12s\t%10s\t%6s\t%14s\t\t\t\t%s\n", "Transaction Id","From Account","To Account","Amount","Time","Remark");
 		walletDao.printTransactions(accountNum, password);
 
 	}
