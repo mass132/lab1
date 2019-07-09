@@ -33,7 +33,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	private boolean validateName(String name) {
-		String regex = "[a-zA-Z ] {3,}";
+		String regex = "[a-zA-Z ]{3,}";
 		return name.matches(regex);
 	}
 
@@ -61,19 +61,19 @@ public class WalletServiceImpl implements WalletService {
 			throws NameFormatException, InvalidMobileNoException, InvalidPasswordException, InvalidDateException {
 		name = name.trim();
 		if (!validateName(name)) {
-			throw new NameFormatException("Pleas enter a valid name. (Numbers are not allowed in name) " + name);
+			throw new NameFormatException("Please enter a valid name (Only alphabets are allowed in name) ");
 		}
 		mobile = mobile.trim();
 		if (!validateMobile(mobile)) {
-			throw new InvalidMobileNoException("The number you have entered is invalid " + mobile);
+			throw new InvalidMobileNoException("Invalid Mobile Number ");
 		}
 		dob = dob.trim();
 		if (!validateDate(dob)) {
-			throw new InvalidDateException("Entered date is invalid " + dob);
+			throw new InvalidDateException("Entered date is invalid ");
 		}
 		password = password.trim();
 		if (!validatePassword(password)) {
-			throw new InvalidPasswordException("Entered password is invalid. " + password);
+			throw new InvalidPasswordException("Entered password is invalid (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) ");
 		}
 		long accountNumber = Long.parseLong(mobile) - 9;
 		Account account = new Account();
@@ -84,8 +84,8 @@ public class WalletServiceImpl implements WalletService {
 		account.setAccountNumber(accountNumber);
 		account.setPassword(password);
 		WalletDao walletDao = getWalletDao();
-		long accountNum = walletDao.createAccount(account);
-		return accountNum;
+		walletDao.createAccount(account);
+		return accountNumber;
 	}
 
 	@Override
