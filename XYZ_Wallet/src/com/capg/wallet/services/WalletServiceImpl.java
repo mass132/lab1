@@ -1,0 +1,130 @@
+package com.capg.wallet.services;
+
+import java.util.Date;
+import java.util.UUID;
+
+import com.capg.wallet.beans.Account;
+import com.capg.wallet.beans.Transaction;
+import com.capg.wallet.dao.WalletDao;
+import com.capg.wallet.dao.WalletDaoImpl;
+import com.capg.wallet.exceptions.AccountNotFoundException;
+import com.capg.wallet.exceptions.IncorrectPasswordException;
+import com.capg.wallet.exceptions.InsufficientFundException;
+import com.capg.wallet.exceptions.InvalidAmountException;
+import com.capg.wallet.exceptions.InvalidDateException;
+import com.capg.wallet.exceptions.InvalidMobileNoException;
+import com.capg.wallet.exceptions.InvalidPasswordException;
+import com.capg.wallet.exceptions.NameFormatException;
+
+public class WalletServiceImpl implements WalletService {
+
+	private boolean validateMobile(String mobile) {
+		return mobile.matches("^[1-9][0-9]{9}$");
+	}
+
+	private boolean validateDate(String date) {
+		String regex = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
+		return date.matches(regex);
+	}
+
+	private boolean validatePassword(String password) {
+		String regex = "[1-9a-zA-Z]{8,}";
+		return password.matches(regex);
+	}
+
+	private boolean validateName(String name) {
+		String regex = "[a-zA-Z ] {3,}";
+		return name.matches(regex);
+	}
+
+	private WalletDao getWalletDao() {
+		return new WalletDaoImpl();
+	}
+
+	private String createTransaction(long accountFrom, Long accountTo, double amount, String remark) {
+		WalletDao walletDao = getWalletDao();
+		Transaction tran = new Transaction();
+		String uniqueKey = UUID.randomUUID().toString();
+		String tranId = uniqueKey.split("-")[0];
+		tran.setAccountFrom(accountFrom);
+		tran.setAmount(amount);
+		tran.setTime(new Date());
+		tran.setRemark(remark);
+		tran.setId(tranId);
+		tran.setAccountTo(accountTo);
+		tranId = walletDao.createTransaction(tran);
+		return tranId;
+	}
+
+	@Override
+	public Long createAccount(String name, String mobile, String dob, String password)
+			throws NameFormatException, InvalidMobileNoException, InvalidPasswordException, InvalidDateException {
+		name = name.trim();
+		if (!validateName(name)) {
+			throw new NameFormatException("Pleas enter a valid name. (Numbers are not allowed in name) " + name);
+		}
+		mobile = mobile.trim();
+		if (!validateMobile(mobile)) {
+			throw new InvalidMobileNoException("The number you have entered is invalid " + mobile);
+		}
+		dob = dob.trim();
+		if (!validateDate(dob)) {
+			throw new InvalidDateException("Entered date is invalid " + dob);
+		}
+		password = password.trim();
+		if (!validatePassword(password)) {
+			throw new InvalidPasswordException("Entered password is invalid. " + password);
+		}
+		long accountNumber = Long.parseLong(mobile) - 9;
+		Account account = new Account();
+		account.setName(name);
+		account.setBalance(0);
+		account.setDob(dob);
+		account.setMobile(mobile);
+		account.setAccountNumber(accountNumber);
+		account.setPassword(password);
+		WalletDao walletDao = getWalletDao();
+		long accountNum = walletDao.createAccount(account);
+		return accountNum;
+	}
+
+	@Override
+	public String depositAmount(long accountNum, double amount, String password) throws AccountNotFoundException,
+			IncorrectPasswordException, InsufficientFundException, InvalidAmountException {
+		WalletDao walletDao = getWalletDao();
+		String tranId = null;
+		walletDao.depositAmount(accountNum, amount, password);
+		tranId = createTransaction(accountNum, null, amount, "deposit");
+		return tranId;
+	}
+
+	@Override
+	public String withdrawAmount(long accountNum, double amount, String password) throws InvalidAmountException,
+			AccountNotFoundException, IncorrectPasswordException, InsufficientFundException {
+		WalletDao walletDao = getWalletDao();
+		String tranId = null;
+		walletDao.withdrawAmount(accountNum, amount, password);
+		tranId = createTransaction(accountNum, null, amount, "withdraw");
+		return tranId;
+	}
+
+	@Override
+	public String fundTransfer(long accountNum, long accountNumTo, double amount, String password)
+			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
+			IncorrectPasswordException {
+		WalletDao walletDao = getWalletDao();
+		String tranId = null;
+		walletDao.fundTransfer(accountNum, password, accountNumTo, amount);
+		tranId = createTransaction(accountNum, accountNumTo, amount, "fund transfer");
+		return tranId;
+	}
+
+	@Override
+	public void printTransactions(long accountNum, String password)
+			throws AccountNotFoundException, IncorrectPasswordException {
+		WalletDao walletDao = getWalletDao();
+		System.out.println("Transaction details for account number " + accountNum + " : \n");
+		walletDao.printTransactions(accountNum, password);
+
+	}
+}

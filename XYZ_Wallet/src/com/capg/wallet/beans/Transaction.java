@@ -1,82 +1,80 @@
 package com.capg.wallet.beans;
 
 import java.util.Date;
-import java.util.HashMap;
 
 public class Transaction {
-	public static HashMap<Long, Transaction> accountData = new HashMap<Long, Transaction>();
-	private static int tempId = 0;
-	private int id;
+	private String id;
 	private Date time;
-	private Long toAccount;
-	private Long fromAccount;
+	private long accountFrom;
+	private Long accountTo;
 	private double amount;
-	private Double balance;
+	private double balance;
 	private String remark;
-	private boolean status;
 
-	public Transaction() {
-		this.id = Transaction.tempId++;
-		this.time = new Date();
-		this.balance = null;
+	public String getId() {
+		return id;
 	}
 
-	public int getId() {
-		return id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Date getTime() {
 		return time;
 	}
 
-	public Long getToAccount() {
-		return toAccount;
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
-
-	public Long getFromAccount() {
-		return fromAccount;
+	public long getAccountFrom() {
+		return accountFrom;
 	}
+
+	public void setAccountFrom(long accountFrom) {
+		this.accountFrom = accountFrom;
+	}
+
+	public Long getAccountTo() {
+		return accountTo;
+	}
+
+	public void setAccountTo(Long accountTo) {
+		this.accountTo = accountTo;
+	}
+
 	public double getAmount() {
 		return amount;
 	}
 
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
 
 	public String getRemark() {
 		return remark;
 	}
 
-	void setRemark(String remark) {
+	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 
-	public boolean getStatus() {
-		return status;
-	}
+	public Transaction() {
+		id = null;
+		time = new Date();
+		balance = 0.0f;
+		accountFrom = 0;
+		accountTo = null;
+		amount = 0.0f;
+		remark = "";
 
-	void setStatus(boolean status) {
-		this.status = status;
 	}
-
-	@Override
-	public String toString() {
-		return "\nTransaction ID : " + id +"\n---------------------------------"+"\nTransaction Time : " + time + "\nFrom Account : " + fromAccount
-				+ "\nTo Account : " + toAccount + "\nAmount : " + amount + "\nBalance : " + balance +"\nRemark : " + remark + "\nCompleted : " + status;
-	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
-
-	public Transaction(Long toAccount, Long fromAccount, double amount, String remark) {
-		super();
-		this.toAccount = toAccount;
-		this.fromAccount = fromAccount;
-		this.amount = amount;
-		this.remark = remark;
-		this.id = Transaction.tempId++;
-		this.time = new Date();
-		this.balance = null;
-	}
-
 }
