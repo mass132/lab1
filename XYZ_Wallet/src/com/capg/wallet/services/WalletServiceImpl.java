@@ -14,6 +14,7 @@ import com.capg.wallet.exceptions.InvalidAmountException;
 import com.capg.wallet.exceptions.InvalidDateException;
 import com.capg.wallet.exceptions.InvalidMobileNoException;
 import com.capg.wallet.exceptions.InvalidPasswordException;
+import com.capg.wallet.exceptions.InvalidReceiverException;
 import com.capg.wallet.exceptions.NameFormatException;
 
 /*
@@ -122,7 +123,11 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public String fundTransfer(long accountNum, long accountNumTo, double amount, String password)
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
-			IncorrectPasswordException {
+			IncorrectPasswordException, InvalidReceiverException {
+		if(accountNum == accountNumTo)
+		{
+			throw new InvalidReceiverException("You cannot transfer funds to your own account.");
+		}
 		WalletDao walletDao = getWalletDao();
 		String tranId = null;
 		walletDao.fundTransfer(accountNum, password, accountNumTo, amount);

@@ -7,6 +7,7 @@ import com.capg.wallet.exceptions.InvalidAmountException;
 import com.capg.wallet.exceptions.InvalidDateException;
 import com.capg.wallet.exceptions.InvalidMobileNoException;
 import com.capg.wallet.exceptions.InvalidPasswordException;
+import com.capg.wallet.exceptions.InvalidReceiverException;
 import com.capg.wallet.exceptions.NameFormatException;
 
 public interface WalletService {
@@ -18,7 +19,7 @@ public interface WalletService {
 
 	String fundTransfer(long accountNum, long accountNum_rec, double amount, String password)
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
-			IncorrectPasswordException;
+			IncorrectPasswordException, InvalidReceiverException;
 
 	Long createAccount(String name, String mobile, String dob, String password)
 			throws NameFormatException, InvalidMobileNoException, InvalidPasswordException, InvalidDateException;

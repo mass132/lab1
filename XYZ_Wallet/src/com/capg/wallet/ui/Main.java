@@ -1,14 +1,7 @@
 package com.capg.wallet.ui;
 
 import java.util.InputMismatchException;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
-
-import com.capg.wallet.beans.Account;
-import com.capg.wallet.dao.WalletData;
 import com.capg.wallet.exceptions.AccountNotFoundException;
 import com.capg.wallet.exceptions.IncorrectPasswordException;
 import com.capg.wallet.exceptions.InsufficientFundException;
@@ -16,6 +9,7 @@ import com.capg.wallet.exceptions.InvalidAmountException;
 import com.capg.wallet.exceptions.InvalidDateException;
 import com.capg.wallet.exceptions.InvalidMobileNoException;
 import com.capg.wallet.exceptions.InvalidPasswordException;
+import com.capg.wallet.exceptions.InvalidReceiverException;
 import com.capg.wallet.exceptions.NameFormatException;
 import com.capg.wallet.services.WalletService;
 import com.capg.wallet.services.WalletServiceImpl;
@@ -119,7 +113,7 @@ public class Main {
 					String tranId = walletService.fundTransfer(accountNum, accountNum_rec, amount, password);
 					System.out.println("Fund Transfer successful!");
 					System.out.println("Transaction ID : " + tranId);
-				} catch (AccountNotFoundException | InvalidAmountException | InsufficientFundException e) {
+				} catch (AccountNotFoundException | InvalidAmountException | InsufficientFundException | InvalidReceiverException e) {
 					System.out.println(e.getMessage());
 				} catch (Exception e) {
 					System.out.println("Something went Wrong!");
