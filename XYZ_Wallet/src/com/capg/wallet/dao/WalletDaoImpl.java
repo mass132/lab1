@@ -22,7 +22,7 @@ public class WalletDaoImpl implements WalletDao {
 	}
 
 	@Override
-	public Account getAccount(long accountNumber) throws AccountNotFoundException {
+	public Account getAccount(String accountNumber) throws AccountNotFoundException {
 		if (WalletData.getAccounts().containsKey(accountNumber)) {
 			return WalletData.getAccounts().get(accountNumber);
 		}
@@ -32,7 +32,7 @@ public class WalletDaoImpl implements WalletDao {
 	@Override
 	public String createTransaction(Transaction tran) {
 		String tranId = tran.getId();
-		long accountNum = tran.getAccountFrom();
+		String accountNum = tran.getAccountFrom();
 		boolean isExists = WalletData.getAllTransactions().containsKey(accountNum);
 		if (isExists) {
 			Map<String, Transaction> var = WalletData.getTransactions(accountNum);
@@ -45,7 +45,7 @@ public class WalletDaoImpl implements WalletDao {
 		return tranId;
 	}
 
-	private void verifyAccount(long accountNum, String password)
+	private void verifyAccount(String accountNum, String password)
 			throws AccountNotFoundException, IncorrectPasswordException {
 		Account account = getAccount(accountNum);
 		if (!account.getPassword().equals(password)) {
@@ -55,7 +55,7 @@ public class WalletDaoImpl implements WalletDao {
 	}
 
 	@Override
-	public void depositAmount(long accountNum, double amount, String password) throws AccountNotFoundException,
+	public void depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
 			IncorrectPasswordException, InsufficientFundException, InvalidAmountException {
 		if (amount <= 0) {
 			throw new InvalidAmountException("Entered Amount is invalid " + amount);
@@ -67,7 +67,7 @@ public class WalletDaoImpl implements WalletDao {
 	}
 
 	@Override
-	public void withdrawAmount(long accountNum, double amount, String password) throws InvalidAmountException,
+	public void withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
 			AccountNotFoundException, IncorrectPasswordException, InsufficientFundException {
 		if (amount <= 0) {
 			throw new InvalidAmountException("Entered Amount is invalid " + amount);
@@ -83,7 +83,7 @@ public class WalletDaoImpl implements WalletDao {
 	}
 
 	@Override
-	public void fundTransfer(long accountNum, String password, long accountTo, double amount)
+	public void fundTransfer(String accountNum, String password, String accountTo, double amount)
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
 			IncorrectPasswordException {
 		if (amount <= 0) {
@@ -101,7 +101,7 @@ public class WalletDaoImpl implements WalletDao {
 	}
 
 	@Override
-	public void printTransactions(long accountNum, String password)
+	public void printTransactions(String accountNum, String password)
 			throws AccountNotFoundException, IncorrectPasswordException {
 		verifyAccount(accountNum, password);
 		Map<String, Transaction> trans = WalletData.getTransactions(accountNum);

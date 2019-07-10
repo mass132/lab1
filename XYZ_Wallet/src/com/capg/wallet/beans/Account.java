@@ -4,7 +4,7 @@ package com.capg.wallet.beans;
  * contains all the properties related to an Account.
  */
 public class Account {
-	private Long accountNumber;
+	private String accountNumber;
 	private String name;
 	private String mobile;
 	private double balance;
@@ -13,7 +13,7 @@ public class Account {
 
 	public Account() {
 		super();
-		accountNumber = 0L;
+		accountNumber = null;
 		name = "";
 		mobile = "";
 		balance = 0.0f;
@@ -35,11 +35,11 @@ public class Account {
 	}
 
 	// private int[] transactionId;
-	public Long getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(Long accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 

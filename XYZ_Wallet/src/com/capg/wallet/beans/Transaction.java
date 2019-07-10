@@ -8,14 +8,15 @@ import java.util.Date;
 public class Transaction {
 	private String id;
 	private Date time;
-	private long accountFrom;
-	private Long accountTo;
+	private String accountFrom;
+	private String accountTo;
 	private double amount;
 	private double balance;
 	private String remark;
 	@Override
 	public String toString() {
-		return String.format("%14s\t%12d\t%10d\t%6.3f\t%14tc\t%s", id,accountFrom,accountTo,amount,time,remark);
+		//return String.format("%14s\t%12s\t%10s\t%6.3f\t%14tc\t%s", id,accountFrom,accountTo,amount,time,remark);
+		return String.format("%-15s\t%-15s\t%-15s\t%-15.3f\t%-15tc\t%-15s", id,accountFrom,accountTo,amount,time,remark);
 	}
 	public String getId() {
 		return id;
@@ -33,19 +34,19 @@ public class Transaction {
 		this.time = time;
 	}
 
-	public long getAccountFrom() {
+	public String getAccountFrom() {
 		return accountFrom;
 	}
 
-	public void setAccountFrom(long accountFrom) {
+	public void setAccountFrom(String accountFrom) {
 		this.accountFrom = accountFrom;
 	}
 
-	public Long getAccountTo() {
+	public String getAccountTo() {
 		return accountTo;
 	}
 
-	public void setAccountTo(Long accountTo) {
+	public void setAccountTo(String accountTo) {
 		this.accountTo = accountTo;
 	}
 
@@ -77,7 +78,7 @@ public class Transaction {
 		id = null;
 		time = new Date();
 		balance = 0.0f;
-		accountFrom = 0;
+		accountFrom = null;
 		accountTo = null;
 		amount = 0.0f;
 		remark = "";

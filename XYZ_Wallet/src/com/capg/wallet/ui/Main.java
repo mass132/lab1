@@ -51,7 +51,7 @@ public class Main {
 					System.out.println(
 							"Create new password (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) :");
 					String password = scan.next().trim();
-					Long accountNum = walletService.createAccount(name, mobile, dob, password);
+					String accountNum = walletService.createAccount(name, mobile, dob, password);
 					if (accountNum != null) {
 						System.out.println("Account created !\n");
 						System.out.println("Your account number is " + accountNum);
@@ -68,7 +68,7 @@ public class Main {
 			case 2:
 				try {
 					System.out.println("Enter account number : ");
-					long accountNum = scan.nextLong();
+					String accountNum = scan.next().trim();
 					System.out.println("Enter amount : ");
 					double amount = scan.nextDouble();
 					System.out.println("Enter your password :");
@@ -86,7 +86,7 @@ public class Main {
 			case 3:
 				try {
 					System.out.println("Enter account number : ");
-					long accountNum = scan.nextLong();
+					String accountNum = scan.next().trim();
 					System.out.println("Enter amount : ");
 					double amount = scan.nextDouble();
 					System.out.println("Enter your password :");
@@ -103,14 +103,14 @@ public class Main {
 			case 4:
 				try {
 					System.out.println("Enter account number : ");
-					long accountNum = scan.nextLong();
+					String accountNum = scan.next().trim();
 					System.out.println("Enter receiver account number : ");
-					long accountNum_rec = scan.nextLong();
+					String accountNumTo = scan.next().trim();
 					System.out.println("Enter amount : ");
 					double amount = scan.nextDouble();
 					System.out.println("Enter your password :");
 					String password = scan.next().trim();
-					String tranId = walletService.fundTransfer(accountNum, accountNum_rec, amount, password);
+					String tranId = walletService.fundTransfer(accountNum, accountNumTo, amount, password);
 					System.out.println("Fund Transfer successful!");
 					System.out.println("Transaction ID : " + tranId);
 				} catch (AccountNotFoundException | InvalidAmountException | InsufficientFundException | InvalidReceiverException e) {
@@ -122,15 +122,13 @@ public class Main {
 			case 5:
 				try {
 					System.out.println("Enter account number : ");
-					long accountNum = scan.nextLong();
+					String accountNum = scan.next().trim();
 					System.out.println("Enter your password :");
 					String password = scan.next().trim();
 					walletService.printTransactions(accountNum, password);
 				} catch (AccountNotFoundException | IncorrectPasswordException e) {
 					System.out.println(e.getMessage());
-				} catch (Exception e) {
-					System.out.println("Something went wrong!");
-				}
+				} 
 				break;
 			case 6:
 				System.out.println("Exiting...");
@@ -150,17 +148,17 @@ public class Main {
 	private void initialize() {
 		WalletService walletService = getWalletService();
 		try {
-			walletService.createAccount("poonam", "1234567890", "12/12/2018", "qwerty12");
-			walletService.createAccount("poonamchand", "1034567890", "12/12/1997", "qwerty12");
-			walletService.depositAmount(1234567890, 50000, "qwerty12");
-			walletService.depositAmount(1034567890, 10000, "qwerty12");
-			walletService.depositAmount(1034567890, 1123, "qwerty12");
-			walletService.withdrawAmount(1234567890, 1500, "qwerty12");
-			walletService.withdrawAmount(1234567890, 1500, "qwerty12");
-			walletService.fundTransfer(1234567890, 1034567890, 2000, "qwerty12");
-			walletService.fundTransfer(1234567890, 1034567890, 200, "qwerty12");
-			walletService.fundTransfer(1234567890, 1034567890, 3000, "qwerty12");
-			
+			String acc1 = walletService.createAccount("poonam", "6234567890", "12/12/2018", "qwerty12");
+			String acc2 = walletService.createAccount("poonamchand", "8034567890", "12/12/1997", "qwerty12");
+			walletService.depositAmount(acc1, 50000, "qwerty12");
+			walletService.depositAmount(acc2, 10000, "qwerty12");
+			walletService.depositAmount(acc2, 1123, "qwerty12");
+			walletService.withdrawAmount(acc1, 1500, "qwerty12");
+			walletService.withdrawAmount(acc2, 1500, "qwerty12");
+			walletService.fundTransfer(acc1, acc2, 2000, "qwerty12");
+			walletService.fundTransfer(acc2, acc1, 200, "qwerty12");
+			walletService.fundTransfer(acc1, acc2, 3000, "qwerty12");
+			System.out.println("Example accounts numbers are : "+acc1+" and "+ acc2);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

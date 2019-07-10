@@ -12,19 +12,19 @@ import com.capg.wallet.exceptions.InvalidAmountException;
 public interface WalletDao {
 	int createAccount(Account account);
 
-	Account getAccount(long accountNumber) throws AccountNotFoundException;
+	Account getAccount(String accountNum) throws AccountNotFoundException;
 
 	String createTransaction(Transaction tran);
 
-	void depositAmount(long accountNum, double amount, String password) throws AccountNotFoundException,
+	void depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
 			IncorrectPasswordException, InsufficientFundException, InvalidAmountException;
 
-	void withdrawAmount(long accountNum, double amount, String password) throws InvalidAmountException,
+	void withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
 			AccountNotFoundException, IncorrectPasswordException, InsufficientFundException;
 
-	void fundTransfer(long accountNum, String password, long accountTo, double amount) throws InvalidAmountException,
+	void fundTransfer(String accountNum, String password, String accountTo, double amount) throws InvalidAmountException,
 			InsufficientFundException, AccountNotFoundException, IncorrectPasswordException;
 
-	void printTransactions(long accountNum, String password)
+	void printTransactions(String accountNum, String password)
 			throws AccountNotFoundException, IncorrectPasswordException;
 }

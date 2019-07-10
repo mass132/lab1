@@ -26,7 +26,7 @@ public class WalletServiceImpl implements WalletService {
 	 * Returns true if mobile number contains 10 digit,else false.
 	 */
 	private boolean validateMobile(String mobile) {
-		return mobile.matches("^[1-9][0-9]{9}$");
+		return mobile.matches("^[6-9][0-9]{9}$");
 	}
 
 	/*
@@ -50,10 +50,24 @@ public class WalletServiceImpl implements WalletService {
 	private WalletDao getWalletDao() {
 		return new WalletDaoImpl();
 	}
-/*
- * Creates a transaction object with the given details and passes it to createTransaction() method of WalletDao Interface. 
- */
-	private String createTransaction(long accountFrom, Long accountTo, double amount, String remark) {
+
+	private static String randomString(int n) {
+
+		// chose a Character random from this String
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuilder sb = new StringBuilder(n);
+		for (int i = 0; i < n; i++) {
+			int index = (int) (AlphaNumericString.length() * Math.random());
+			sb.append(AlphaNumericString.charAt(index));
+		}
+		return sb.toString();
+	}
+
+	/*
+	 * Creates a transaction object with the given details and passes it to
+	 * createTransaction() method of WalletDao Interface.
+	 */
+	private String createTransaction(String accountFrom, String accountTo, double amount, String remark) {
 		WalletDao walletDao = getWalletDao();
 		Transaction tran = new Transaction();
 		String uniqueKey = UUID.randomUUID().toString();
@@ -69,7 +83,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public Long createAccount(String name, String mobile, String dob, String password)
+	public String createAccount(String name, String mobile, String dob, String password)
 			throws NameFormatException, InvalidMobileNoException, InvalidPasswordException, InvalidDateException {
 		name = name.trim();
 		if (!validateName(name)) {
@@ -85,9 +99,10 @@ public class WalletServiceImpl implements WalletService {
 		}
 		password = password.trim();
 		if (!validatePassword(password)) {
-			throw new InvalidPasswordException("Entered password is invalid (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) ");
+			throw new InvalidPasswordException(
+					"Entered password is invalid (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) ");
 		}
-		long accountNumber = Long.parseLong(mobile);
+		String accountNumber = randomString(3) + mobile;
 		Account account = new Account();
 		account.setName(name);
 		account.setBalance(0);
@@ -101,7 +116,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public String depositAmount(long accountNum, double amount, String password) throws AccountNotFoundException,
+	public String depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
 			IncorrectPasswordException, InsufficientFundException, InvalidAmountException {
 		WalletDao walletDao = getWalletDao();
 		String tranId = null;
@@ -111,7 +126,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public String withdrawAmount(long accountNum, double amount, String password) throws InvalidAmountException,
+	public String withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
 			AccountNotFoundException, IncorrectPasswordException, InsufficientFundException {
 		WalletDao walletDao = getWalletDao();
 		String tranId = null;
@@ -121,11 +136,10 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public String fundTransfer(long accountNum, long accountNumTo, double amount, String password)
+	public String fundTransfer(String accountNum, String accountNumTo, double amount, String password)
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
 			IncorrectPasswordException, InvalidReceiverException {
-		if(accountNum == accountNumTo)
-		{
+		if (accountNum == accountNumTo) {
 			throw new InvalidReceiverException("You cannot transfer funds to your own account.");
 		}
 		WalletDao walletDao = getWalletDao();
@@ -136,11 +150,12 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public void printTransactions(long accountNum, String password)
+	public void printTransactions(String accountNum, String password)
 			throws AccountNotFoundException, IncorrectPasswordException {
 		WalletDao walletDao = getWalletDao();
 		System.out.println("\nTransaction details for account number " + accountNum + " :");
-		System.out.printf("%14s\t%12s\t%10s\t%6s\t%14s\t\t\t\t%s\n", "Transaction Id","From Account","To Account","Amount","Time","Remark");
+		System.out.printf("%-15s\t%-15s\t%-15s\t%-15s\t%-15s\t\t\t%-15s\n", "Transaction Id", "From Account", "To Account",
+				"Amount", "Time", "Remark");
 		walletDao.printTransactions(accountNum, password);
 
 	}
