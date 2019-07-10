@@ -17,7 +17,7 @@ import com.capg.wallet.services.WalletServiceImpl;
 public class Main {
 	private void showMenu() {
 		System.out.println(
-				"***************************************************\n\t\tXYZ Wallet\n***************************************************\n1.\tCreate Account\n2.\tDeposit\n3.\tWithdraw\n4.\tFund Transfer\n5.\tPrint Transaction\n6.\tExit\nPlease enter your choice : ");
+				"***************************************************\n\t\tXYZ Wallet\n***************************************************\n1.\tCreate Account\n2.\tDeposit\n3.\tWithdraw\n4.\tFund Transfer\n5.\tPrint Transactions\n6.\tExit\nPlease enter your choice : ");
 	}
 
 	private WalletService getWalletService() {
