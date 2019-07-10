@@ -6,7 +6,9 @@ import com.capg.wallet.exceptions.AccountNotFoundException;
 import com.capg.wallet.exceptions.IncorrectPasswordException;
 import com.capg.wallet.exceptions.InsufficientFundException;
 import com.capg.wallet.exceptions.InvalidAmountException;
-
+/*
+ * interface for WalletDaoImpl,contains the methods that must be implemented in the child class.
+ */
 public interface WalletDao {
 	int createAccount(Account account);
 

@@ -1,8 +1,14 @@
 package com.capg.wallet.ui;
 
 import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
+import com.capg.wallet.beans.Account;
+import com.capg.wallet.dao.WalletData;
 import com.capg.wallet.exceptions.AccountNotFoundException;
 import com.capg.wallet.exceptions.IncorrectPasswordException;
 import com.capg.wallet.exceptions.InsufficientFundException;
@@ -17,7 +23,7 @@ import com.capg.wallet.services.WalletServiceImpl;
 public class Main {
 	private void showMenu() {
 		System.out.println(
-				"***************************************************\n\t\tXYZ Wallet\n***************************************************\n1.\tCreate Account\n2.\tDeposit\n3.\tWithdraw\n4.\tFund Transfer\n5.\tPrint Transactions\n6.\tExit\nPlease enter your choice : ");
+				"***************************************************\n\t\tXYZ Wallet\n***************************************************\n1.\tCreate Account\n2.\tDeposit\n3.\tWithdraw\n4.\tFund Transfer\n5.\tPrint Transactions\n6.\tExit\n***************************************************\nPlease enter your choice : ");
 	}
 
 	private WalletService getWalletService() {
@@ -27,8 +33,8 @@ public class Main {
 	private void runApp() {
 		Scanner scan = new Scanner(System.in);
 		WalletService walletService = getWalletService();
-		boolean run = true;
-		while (run) {
+		char run = 'y';
+		do {
 			showMenu();
 			int choice;
 			try {
@@ -134,16 +140,17 @@ public class Main {
 				break;
 			case 6:
 				System.out.println("Exiting...");
-				run = false;
+				run = 'n';
 				break;
 			default:
 				System.out.println("Invalid Choice !");
 			}
-			System.out.println("Press Any Key to continue......");
-			scan.nextLine();
+			System.out.println("\nDo you want to continue? (y/n)......");
+			run = scan.next().charAt(0);
 
-		}
+		}while (run == 'y' || run == 'Y');
 		scan.close();
+		System.out.println("Bye!");
 	}
 	@SuppressWarnings("unused")
 	private void initialize() {
@@ -151,26 +158,24 @@ public class Main {
 		try {
 			walletService.createAccount("poonam", "1234567890", "12/12/2018", "qwerty12");
 			walletService.createAccount("poonamchand", "1034567890", "12/12/1997", "qwerty12");
-			walletService.depositAmount(1234567881, 50000, "qwerty12");
-			walletService.depositAmount(1034567881, 10000, "qwerty12");
-			walletService.depositAmount(1034567881, 1123, "qwerty12");
-			walletService.withdrawAmount(1234567881, 1500, "qwerty12");
-			walletService.withdrawAmount(1234567881, 1500, "qwerty12");
-			walletService.fundTransfer(1234567881, 1034567881, 2000, "qwerty12");
-			walletService.printTransactions(1234567881, "qwerty12");
-			walletService.printTransactions(1034567881, "qwerty12");
+			walletService.depositAmount(1234567890, 50000, "qwerty12");
+			walletService.depositAmount(1034567890, 10000, "qwerty12");
+			walletService.depositAmount(1034567890, 1123, "qwerty12");
+			walletService.withdrawAmount(1234567890, 1500, "qwerty12");
+			walletService.withdrawAmount(1234567890, 1500, "qwerty12");
+			walletService.fundTransfer(1234567890, 1034567890, 2000, "qwerty12");
+			walletService.fundTransfer(1234567890, 1034567890, 200, "qwerty12");
+			walletService.fundTransfer(1234567890, 1034567890, 3000, "qwerty12");
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Initialized");
-
 	}
 
 	public static void main(String[] args) {
 		Main obj = new Main();
 		obj.initialize();
 		obj.runApp();
-
 	}
 
 	

@@ -16,12 +16,21 @@ import com.capg.wallet.exceptions.InvalidMobileNoException;
 import com.capg.wallet.exceptions.InvalidPasswordException;
 import com.capg.wallet.exceptions.NameFormatException;
 
+/*
+ * Implements abstract methods from WalletService Interface.
+ */
 public class WalletServiceImpl implements WalletService {
 
+	/*
+	 * Returns true if mobile number contains 10 digit,else false.
+	 */
 	private boolean validateMobile(String mobile) {
 		return mobile.matches("^[1-9][0-9]{9}$");
 	}
 
+	/*
+	 * Returns true if date is in accepted format,else false.
+	 */
 	private boolean validateDate(String date) {
 		String regex = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
 		return date.matches(regex);
@@ -40,7 +49,9 @@ public class WalletServiceImpl implements WalletService {
 	private WalletDao getWalletDao() {
 		return new WalletDaoImpl();
 	}
-
+/*
+ * Creates a transaction object with the given details and passes it to createTransaction() method of WalletDao Interface. 
+ */
 	private String createTransaction(long accountFrom, Long accountTo, double amount, String remark) {
 		WalletDao walletDao = getWalletDao();
 		Transaction tran = new Transaction();
@@ -75,7 +86,7 @@ public class WalletServiceImpl implements WalletService {
 		if (!validatePassword(password)) {
 			throw new InvalidPasswordException("Entered password is invalid (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) ");
 		}
-		long accountNumber = Long.parseLong(mobile) - 9;
+		long accountNumber = Long.parseLong(mobile);
 		Account account = new Account();
 		account.setName(name);
 		account.setBalance(0);

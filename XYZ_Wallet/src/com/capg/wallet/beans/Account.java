@@ -1,11 +1,15 @@
 package com.capg.wallet.beans;
 
+/*
+ * contains all the properties related to an Account.
+ */
 public class Account {
 	private Long accountNumber;
 	private String name;
 	private String mobile;
 	private double balance;
 	private String dob;
+	private String password;
 
 	public Account() {
 		super();
@@ -16,7 +20,11 @@ public class Account {
 		dob = "";
 	}
 
-	private String password;
+	public String toString() {
+		return String.format(
+				"Account Details for Account No.\t:\t%d\nCustomer Name\t:\t%s\nMobile\t\t:\t%s\nBalance\t\t:\t%.3f",
+				accountNumber, name, mobile, balance);
+	}
 
 	public String getPassword() {
 		return password;

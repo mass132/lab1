@@ -33,9 +33,15 @@ public class WalletDaoImpl implements WalletDao {
 	public String createTransaction(Transaction tran) {
 		String tranId = tran.getId();
 		long accountNum = tran.getAccountFrom();
-		Map<String, Transaction> currentTranMap = new HashMap<String, Transaction>();
-		currentTranMap.put(tranId, tran);
-		WalletData.getAllTransactions().put(accountNum, (HashMap<String, Transaction>) currentTranMap);
+		boolean isExists = WalletData.getAllTransactions().containsKey(accountNum);
+		if (isExists) {
+			Map<String, Transaction> var = WalletData.getTransactions(accountNum);
+			var.put(tranId, tran);
+		} else {
+			Map<String, Transaction> currentTranMap = new HashMap<String, Transaction>();
+			currentTranMap.put(tranId, tran);
+			WalletData.getAllTransactions().put(accountNum, (HashMap<String, Transaction>) currentTranMap);
+		}
 		return tranId;
 	}
 

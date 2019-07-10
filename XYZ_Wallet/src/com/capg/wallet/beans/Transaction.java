@@ -2,12 +2,10 @@ package com.capg.wallet.beans;
 
 import java.util.Date;
 
+/*
+ * contains all the properties related to a transaction.
+ */
 public class Transaction {
-	@Override
-	public String toString() {
-		return String.format("%14s\t%12d\t%10d\t%6.3f\t%14tc\t%s", id,accountFrom,accountTo,amount,time,remark);
-	}
-
 	private String id;
 	private Date time;
 	private long accountFrom;
@@ -15,7 +13,10 @@ public class Transaction {
 	private double amount;
 	private double balance;
 	private String remark;
-
+	@Override
+	public String toString() {
+		return String.format("%14s\t%12d\t%10d\t%6.3f\t%14tc\t%s", id,accountFrom,accountTo,amount,time,remark);
+	}
 	public String getId() {
 		return id;
 	}
