@@ -3,6 +3,11 @@ package com.capg.wallet.beans;
 import java.util.Date;
 
 public class Transaction {
+	@Override
+	public String toString() {
+		return String.format("%14s\t%12d\t%10d\t%6.3f\t%14tc\t%s", id,accountFrom,accountTo,amount,time,remark);
+	}
+
 	private String id;
 	private Date time;
 	private long accountFrom;
