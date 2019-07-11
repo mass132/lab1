@@ -1,6 +1,5 @@
 package com.capg.wallet.dao;
-
-import java.io.Serializable;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +30,11 @@ public class WalletData{
 	public static Map<String, HashMap<String, Transaction>> getAllTransactions() {
 		return transactions;
 	}
+	/*
+	 * takes account number as input and returns the account object.
+	 */
 	public static Account getAccountDetails(String accountNum)
 	{
 		return accounts.get(accountNum);
 	}
-
 }

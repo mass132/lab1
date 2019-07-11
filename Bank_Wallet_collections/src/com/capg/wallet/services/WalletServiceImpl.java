@@ -25,14 +25,14 @@ public class WalletServiceImpl implements WalletService {
 	/*
 	 * Returns true if mobile number contains 10 digit,else false.
 	 */
-	private boolean validateMobile(String mobile) {
+	public boolean validateMobile(String mobile) {
 		return mobile.matches("^[6-9][0-9]{9}$");
 	}
 
 	/*
 	 * Returns true if date is in accepted format,else false.
 	 */
-	private boolean validateDate(String date) {
+	public boolean validateDate(String date) {
 		String regex = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
 		return date.matches(regex);
 	}
@@ -40,7 +40,7 @@ public class WalletServiceImpl implements WalletService {
 	/*
 	 * Returns true if password is in correct format.
 	 */
-	private boolean validatePassword(String password) {
+	public boolean validatePassword(String password) {
 		String regex = "[1-9a-zA-Z]{8,}";
 		return password.matches(regex);
 	}
@@ -48,7 +48,7 @@ public class WalletServiceImpl implements WalletService {
 	/*
 	 * Returns true if name is in accepted format,else false.
 	 */
-	private boolean validateName(String name) {
+	public boolean validateName(String name) {
 		String regex = "[a-zA-Z ]{3,}";
 		return name.matches(regex);
 	}
@@ -163,7 +163,7 @@ public class WalletServiceImpl implements WalletService {
 	public String fundTransfer(String accountNum, String accountNumTo, double amount, String password)
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
 			IncorrectPasswordException, InvalidReceiverException {
-		if (accountNum == accountNumTo) {
+		if (accountNum.equals(accountNumTo)) {
 			throw new InvalidReceiverException("You cannot transfer funds to your own account.");
 		}
 		WalletDao walletDao = getWalletDao();

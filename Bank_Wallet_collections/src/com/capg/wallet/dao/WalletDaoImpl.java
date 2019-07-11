@@ -16,23 +16,28 @@ import com.capg.wallet.exceptions.InvalidAmountException;
 public class WalletDaoImpl implements WalletDao {
 
 	/*
-	 * creates new account
+	 * Creates a new account.
+	 * @param account A variable of Account type
+	 * @return A String Data type
 	 */
 	@Override
-	public int createAccount(Account account) {
-		WalletData.getAccounts().put(account.getAccountNumber(), account);
-		return 1;
+	public String createAccount(Account account) {
+		String accountNum = account.getAccountNumber();
+		WalletData.getAccounts().put(accountNum, account);
+		return accountNum;
 	}
 
 	/*
-	 * Returns Account object using account number
+	 * Gets the account details.
+	 * @param accountNum of type String
+	 * @return An Account data type
 	 */
 	@Override
-	public Account getAccount(String accountNumber) throws AccountNotFoundException {
-		if (WalletData.getAccounts().containsKey(accountNumber)) {
-			return WalletData.getAccounts().get(accountNumber);
+	public Account getAccount(String accountNum) throws AccountNotFoundException {
+		if (WalletData.getAccounts().containsKey(accountNum)) {
+			return WalletData.getAccounts().get(accountNum);
 		}
-		throw new AccountNotFoundException("No account found for account number " + accountNumber);
+		throw new AccountNotFoundException("No account found for account number " + accountNum);
 	}
 
 	/*

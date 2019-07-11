@@ -1,0 +1,2 @@
+Java is a general-purpose, concurrent, object-oriented, class-based, and the runtime environment(JRE) which consists of JVM which is the cornerstone of the Java platform.
+This blog on What is Java will clear all your doubts about why to learn java, features and how it works.

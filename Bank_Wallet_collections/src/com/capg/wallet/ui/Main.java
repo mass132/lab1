@@ -169,7 +169,7 @@ public class Main {
 			walletService.fundTransfer(acc1, acc2, 2000, "qwerty12");
 			walletService.fundTransfer(acc2, acc1, 200, "qwerty12");
 			walletService.fundTransfer(acc1, acc2, 3000, "qwerty12");
-			System.out.println("Example accounts numbers are : "+acc1+" and "+ acc2);
+			System.out.println("Testing account numbers are : "+acc1+" and "+ acc2);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

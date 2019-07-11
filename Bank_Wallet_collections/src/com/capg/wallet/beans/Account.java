@@ -1,7 +1,7 @@
 package com.capg.wallet.beans;
 
 /*
- * contains all the properties related to an Account.
+ * Account.java - Class for Account related details.
  */
 public class Account {
 	private String accountNumber;
