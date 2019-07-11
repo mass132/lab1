@@ -1,4 +1,4 @@
-package com.capg.wallet.exceptions;
+package com.capg.wallet.utils;
 
 public class InvalidDateException extends Exception {
 

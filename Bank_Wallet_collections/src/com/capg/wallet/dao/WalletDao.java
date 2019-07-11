@@ -2,10 +2,10 @@ package com.capg.wallet.dao;
 
 import com.capg.wallet.beans.Account;
 import com.capg.wallet.beans.Transaction;
-import com.capg.wallet.exceptions.AccountNotFoundException;
-import com.capg.wallet.exceptions.IncorrectPasswordException;
-import com.capg.wallet.exceptions.InsufficientFundException;
-import com.capg.wallet.exceptions.InvalidAmountException;
+import com.capg.wallet.utils.AccountNotFoundException;
+import com.capg.wallet.utils.IncorrectPasswordException;
+import com.capg.wallet.utils.InsufficientFundException;
+import com.capg.wallet.utils.InvalidAmountException;
 /*
  * interface for WalletDaoImpl,contains the methods that must be implemented in the child class.
  */

@@ -1,14 +1,10 @@
 package com.capg.wallet.services;
 
-import com.capg.wallet.exceptions.AccountNotFoundException;
-import com.capg.wallet.exceptions.IncorrectPasswordException;
-import com.capg.wallet.exceptions.InsufficientFundException;
-import com.capg.wallet.exceptions.InvalidAmountException;
-import com.capg.wallet.exceptions.InvalidDateException;
-import com.capg.wallet.exceptions.InvalidMobileNoException;
-import com.capg.wallet.exceptions.InvalidPasswordException;
-import com.capg.wallet.exceptions.InvalidReceiverException;
-import com.capg.wallet.exceptions.NameFormatException;
+import com.capg.wallet.utils.AccountNotFoundException;
+import com.capg.wallet.utils.IncorrectPasswordException;
+import com.capg.wallet.utils.InsufficientFundException;
+import com.capg.wallet.utils.InvalidAmountException;
+import com.capg.wallet.utils.InvalidReceiverException;
 
 public interface WalletService {
 	String depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
@@ -21,8 +17,7 @@ public interface WalletService {
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
 			IncorrectPasswordException, InvalidReceiverException;
 
-	String createAccount(String name, String mobile, String dob, String password)
-			throws NameFormatException, InvalidMobileNoException, InvalidPasswordException, InvalidDateException;
+	String createAccount(String name, String mobile, String dob, String password);
 
 	void printTransactions(String accountNum, String password)
 			throws AccountNotFoundException, IncorrectPasswordException;

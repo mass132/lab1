@@ -8,10 +8,10 @@ import java.util.Map.Entry;
 
 import com.capg.wallet.beans.Account;
 import com.capg.wallet.beans.Transaction;
-import com.capg.wallet.exceptions.AccountNotFoundException;
-import com.capg.wallet.exceptions.IncorrectPasswordException;
-import com.capg.wallet.exceptions.InsufficientFundException;
-import com.capg.wallet.exceptions.InvalidAmountException;
+import com.capg.wallet.utils.AccountNotFoundException;
+import com.capg.wallet.utils.IncorrectPasswordException;
+import com.capg.wallet.utils.InsufficientFundException;
+import com.capg.wallet.utils.InvalidAmountException;
 
 public class WalletDaoImpl implements WalletDao {
 

@@ -2,17 +2,19 @@ package com.capg.wallet.ui;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import com.capg.wallet.exceptions.AccountNotFoundException;
-import com.capg.wallet.exceptions.IncorrectPasswordException;
-import com.capg.wallet.exceptions.InsufficientFundException;
-import com.capg.wallet.exceptions.InvalidAmountException;
-import com.capg.wallet.exceptions.InvalidDateException;
-import com.capg.wallet.exceptions.InvalidMobileNoException;
-import com.capg.wallet.exceptions.InvalidPasswordException;
-import com.capg.wallet.exceptions.InvalidReceiverException;
-import com.capg.wallet.exceptions.NameFormatException;
+
 import com.capg.wallet.services.WalletService;
 import com.capg.wallet.services.WalletServiceImpl;
+import com.capg.wallet.utils.AccountNotFoundException;
+import com.capg.wallet.utils.IncorrectPasswordException;
+import com.capg.wallet.utils.InsufficientFundException;
+import com.capg.wallet.utils.InvalidAmountException;
+import com.capg.wallet.utils.InvalidDateException;
+import com.capg.wallet.utils.InvalidMobileNoException;
+import com.capg.wallet.utils.InvalidPasswordException;
+import com.capg.wallet.utils.InvalidReceiverException;
+import com.capg.wallet.utils.NameFormatException;
+import com.capg.wallet.utils.Utils;
 
 public class Main {
 	private void showMenu() {
@@ -30,13 +32,10 @@ public class Main {
 		char run = 'y';
 		do {
 			showMenu();
-			int choice;
+			int choice = 0;
 			try {
 				choice = scan.nextInt();
 			} catch (InputMismatchException e) {
-				System.out.println("Something went wrong!");
-				System.out.println("Please try again!");
-				continue;
 			}
 			switch (choice) {
 			case 1:
@@ -44,13 +43,17 @@ public class Main {
 					System.out.println("Enter your name : ");
 					String name = scan.next();
 					name += scan.nextLine().trim();
+					Utils.validateName(name);
 					System.out.println("Enter mobile number : ");
 					String mobile = scan.next().trim();
+					Utils.validateMobile(mobile);
 					System.out.println("Enter your Date of Birth eg DD/MM/YYYY : ");
 					String dob = scan.next().trim();
+					Utils.validateDate(dob);
 					System.out.println(
 							"Create new password (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) :");
 					String password = scan.next().trim();
+					Utils.validatePassword(password);
 					String accountNum = walletService.createAccount(name, mobile, dob, password);
 					if (accountNum != null) {
 						System.out.println("Account created !\n");
@@ -74,7 +77,7 @@ public class Main {
 					walletService.showBalance(accountNum, password);
 				} catch (AccountNotFoundException | IncorrectPasswordException e) {
 					System.out.println(e.getMessage());
-				} 
+				}
 				break;
 			case 3:
 				try {
@@ -124,7 +127,8 @@ public class Main {
 					String tranId = walletService.fundTransfer(accountNum, accountNumTo, amount, password);
 					System.out.println("Fund Transfer successful!");
 					System.out.println("Transaction ID : " + tranId);
-				} catch (AccountNotFoundException | InvalidAmountException | InsufficientFundException | InvalidReceiverException e) {
+				} catch (AccountNotFoundException | InvalidAmountException | InsufficientFundException
+						| InvalidReceiverException e) {
 					System.out.println(e.getMessage());
 				} catch (Exception e) {
 					System.out.println("Something went Wrong!");
@@ -139,7 +143,7 @@ public class Main {
 					walletService.printTransactions(accountNum, password);
 				} catch (AccountNotFoundException | IncorrectPasswordException e) {
 					System.out.println(e.getMessage());
-				} 
+				}
 				break;
 			case 7:
 				System.out.println("Exiting...");
@@ -150,12 +154,11 @@ public class Main {
 			}
 			System.out.println("\nDo you want to continue? (y/n)......");
 			run = scan.next().charAt(0);
-
-		}while (run == 'y' || run == 'Y');
+		} while (run == 'y' || run == 'Y');
 		scan.close();
 		System.out.println("Bye!");
 	}
-	@SuppressWarnings("unused")
+
 	private void initialize() {
 		WalletService walletService = getWalletService();
 		try {
@@ -169,7 +172,7 @@ public class Main {
 			walletService.fundTransfer(acc1, acc2, 2000, "qwerty12");
 			walletService.fundTransfer(acc2, acc1, 200, "qwerty12");
 			walletService.fundTransfer(acc1, acc2, 3000, "qwerty12");
-			System.out.println("Testing account numbers are : "+acc1+" and "+ acc2);
+			System.out.println("Testing account numbers are : " + acc1 + " and " + acc2);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -180,7 +183,5 @@ public class Main {
 		obj.initialize();
 		obj.runApp();
 	}
-
-	
 
 }

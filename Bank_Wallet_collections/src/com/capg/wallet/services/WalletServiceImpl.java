@@ -7,15 +7,12 @@ import com.capg.wallet.beans.Account;
 import com.capg.wallet.beans.Transaction;
 import com.capg.wallet.dao.WalletDao;
 import com.capg.wallet.dao.WalletDaoImpl;
-import com.capg.wallet.exceptions.AccountNotFoundException;
-import com.capg.wallet.exceptions.IncorrectPasswordException;
-import com.capg.wallet.exceptions.InsufficientFundException;
-import com.capg.wallet.exceptions.InvalidAmountException;
-import com.capg.wallet.exceptions.InvalidDateException;
-import com.capg.wallet.exceptions.InvalidMobileNoException;
-import com.capg.wallet.exceptions.InvalidPasswordException;
-import com.capg.wallet.exceptions.InvalidReceiverException;
-import com.capg.wallet.exceptions.NameFormatException;
+import com.capg.wallet.utils.AccountNotFoundException;
+import com.capg.wallet.utils.IncorrectPasswordException;
+import com.capg.wallet.utils.InsufficientFundException;
+import com.capg.wallet.utils.InvalidAmountException;
+import com.capg.wallet.utils.InvalidReceiverException;
+import com.capg.wallet.utils.Utils;
 
 /*
  * Implements abstract methods from WalletService Interface.
@@ -23,56 +20,10 @@ import com.capg.wallet.exceptions.NameFormatException;
 public class WalletServiceImpl implements WalletService {
 
 	/*
-	 * Returns true if mobile number contains 10 digit,else false.
-	 */
-	public boolean validateMobile(String mobile) {
-		return mobile.matches("^[6-9][0-9]{9}$");
-	}
-
-	/*
-	 * Returns true if date is in accepted format,else false.
-	 */
-	public boolean validateDate(String date) {
-		String regex = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
-		return date.matches(regex);
-	}
-
-	/*
-	 * Returns true if password is in correct format.
-	 */
-	public boolean validatePassword(String password) {
-		String regex = "[1-9a-zA-Z]{8,}";
-		return password.matches(regex);
-	}
-
-	/*
-	 * Returns true if name is in accepted format,else false.
-	 */
-	public boolean validateName(String name) {
-		String regex = "[a-zA-Z ]{3,}";
-		return name.matches(regex);
-	}
-
-	/*
 	 * returns WalletDao object.
 	 */
 	private WalletDao getWalletDao() {
 		return new WalletDaoImpl();
-	}
-
-	/*
-	 * Generates random Initials for account number.
-	 */
-	private static String randomString(int n) {
-
-		// chose a Character random from this String
-		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder sb = new StringBuilder(n);
-		for (int i = 0; i < n; i++) {
-			int index = (int) (AlphaNumericString.length() * Math.random());
-			sb.append(AlphaNumericString.charAt(index));
-		}
-		return sb.toString();
 	}
 
 	/*
@@ -98,26 +49,9 @@ public class WalletServiceImpl implements WalletService {
 	 * creates new account
 	 */
 	@Override
-	public String createAccount(String name, String mobile, String dob, String password)
-			throws NameFormatException, InvalidMobileNoException, InvalidPasswordException, InvalidDateException {
-		name = name.trim();
-		if (!validateName(name)) {
-			throw new NameFormatException("Please enter a valid name (Only alphabets are allowed in name) ");
-		}
-		mobile = mobile.trim();
-		if (!validateMobile(mobile)) {
-			throw new InvalidMobileNoException("Invalid Mobile Number ");
-		}
-		dob = dob.trim();
-		if (!validateDate(dob)) {
-			throw new InvalidDateException("Entered date is invalid ");
-		}
-		password = password.trim();
-		if (!validatePassword(password)) {
-			throw new InvalidPasswordException(
-					"Entered password is invalid (Your password must contain 1 Uppercase, 1 Lowercase, 1 number and the length should be minimum 8 characterds long) ");
-		}
-		String accountNumber = randomString(3) + mobile;
+	public String createAccount(String name, String mobile, String dob, String password) {
+	
+		String accountNumber = Utils.randomString(3) + mobile;
 		Account account = new Account();
 		account.setName(name);
 		account.setBalance(0);
@@ -195,6 +129,6 @@ public class WalletServiceImpl implements WalletService {
 			throws AccountNotFoundException, IncorrectPasswordException {
 		WalletDao walletDao = getWalletDao();
 		walletDao.showBalance(accountNum, password);
-		
+
 	}
 }
