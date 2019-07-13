@@ -12,12 +12,12 @@ public class FileProgram {
 		try {
 			fReader = new FileReader("source.txt");
 			fWriter = new FileWriter("target.txt");
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {//Caught when file does not exist
 			System.out.println("File does not exist!");
 		}catch (Exception e) {
 			System.out.println("Something went wrong!");
 		}
-		CopyDataThread t = new CopyDataThread(fReader,fWriter);
+		CopyDataThread t = new CopyDataThread(fReader,fWriter);//Passing FileReader amd FileWriter objects to CopyDataThread object
 		t.start();
 	}
 

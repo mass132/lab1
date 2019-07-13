@@ -20,13 +20,13 @@ public class ThreadPool {
 		System.out.println("Thread Name : "+ Thread.currentThread().getName());
 		*/
 
-		ScheduledExecutorService service = Executors.newScheduledThreadPool(2);
+		ScheduledExecutorService service = Executors.newScheduledThreadPool(20);
 		//task to run after 5 seconds delay
 		//service.schedule(new Task(),5, TimeUnit.SECONDS);
 		//task to run repeatedly for every 5 seconds
-		//service.scheduleAtFixedRate(new Task(),10,5, TimeUnit.SECONDS);
-		service.scheduleWithFixedDelay(new Task(),10,5, TimeUnit.SECONDS);
-		System.out.println("Thread Name : "+ Thread.currentThread().getName());
+		service.scheduleAtFixedRate(new Task(),10,5, TimeUnit.SECONDS);
+		//service.scheduleWithFixedDelay(new Task(),10,5, TimeUnit.SECONDS);
+		//System.out.println("Thread Name : "+ Thread.currentThread().getName());
 	}
 
 }

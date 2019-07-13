@@ -1,6 +1,5 @@
 package com.capg.wallet.ui;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.capg.wallet.services.WalletService;
@@ -32,13 +31,10 @@ public class Main {
 		char run = 'y';
 		do {
 			showMenu();
-			int choice = 0;
-			try {
-				choice = scan.nextInt();
-			} catch (InputMismatchException e) {
-			}
+			String choice = "";
+				choice = scan.next().trim();
 			switch (choice) {
-			case 1:
+			case "1":
 				try {
 					System.out.println("Enter your name : ");
 					String name = scan.next();
@@ -68,7 +64,7 @@ public class Main {
 					System.out.println("Something went wrong!");
 				}
 				break;
-			case 2:
+			case "2":
 				try {
 					System.out.println("Enter account number : ");
 					String accountNum = scan.next().trim();
@@ -79,7 +75,7 @@ public class Main {
 					System.out.println(e.getMessage());
 				}
 				break;
-			case 3:
+			case "3":
 				try {
 					System.out.println("Enter account number : ");
 					String accountNum = scan.next().trim();
@@ -97,7 +93,7 @@ public class Main {
 					System.out.println("Something went Wrong!");
 				}
 				break;
-			case 4:
+			case "4":
 				try {
 					System.out.println("Enter account number : ");
 					String accountNum = scan.next().trim();
@@ -114,7 +110,7 @@ public class Main {
 					System.out.println("Something went Wrong!");
 				}
 				break;
-			case 5:
+			case "5":
 				try {
 					System.out.println("Enter account number : ");
 					String accountNum = scan.next().trim();
@@ -134,7 +130,7 @@ public class Main {
 					System.out.println("Something went Wrong!");
 				}
 				break;
-			case 6:
+			case "6":
 				try {
 					System.out.println("Enter account number : ");
 					String accountNum = scan.next().trim();
@@ -145,9 +141,9 @@ public class Main {
 					System.out.println(e.getMessage());
 				}
 				break;
-			case 7:
-				System.out.println("Exiting...");
-				run = 'n';
+			case "7":
+				System.out.println("Program closed");
+				System.exit(0);
 				break;
 			default:
 				System.out.println("Invalid Choice !");
