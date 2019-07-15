@@ -13,7 +13,7 @@ interface Favourite
 public class LambdaExpression {
 	public static void main(String[] args) {
 		Scanner scan= new Scanner(System.in);
-		String string = scan.next().trim();
+		String string = scan.nextLine().trim();
 		Favourite f = s->s.length();
 		System.out.println(f.length(string));
 		scan.close();
