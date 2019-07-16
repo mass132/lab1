@@ -1,0 +1,129 @@
+Java Quiz key
+
+1. a
+str[i] is String type array, cannot assign int to it.
+
+2. b
+overriding and overloading ensures multiple behaviour, thus implementing polymorphism
+
+
+3. a
+In the expression c=a+b, a and b are converted to int. Casting can solve the issue: c=(short)(a+b);
+
+4. a
+Checked exception IOException must be declared to be thrown in m1()
+ public void m1() throws IOException
+
+
+5. d
+static blocks are executed first.
+
+6. b
+int sum(int first, int second) { return first + second; }
+('a' doesn't have return statement, 'c' has no type declaration for second, 'd' has no method return type)
+
+7. b
+start() cannot be called second time as the thread is already in running state.
+
+8. d
+Set does not allow multiples. 'A' cannot be added second time and add() method returns false.
+
+9. c
+ArrayList expands automatically to fit the addition
+
+10. d
+main thread waits till thread t is dead when t.join() is called, therby allowing data to be assigned 10 after 2 seconds
+
+11. b
+In case of short circuit operators && and || if the first expression alone can determine a condition, then the second is not checked. Here, in cases 'a' and 'c' the second expression is not verified
+
+12. c
+'<' and '>' have higher precedence to '&' and '|' so 5 & 7 and 5 | 7 should be enclosed in parenthesis. All operators are checked by compiler.
+
+13. b
+Compile error. Checked exception IOException is never thrown in try block, so cannot be caught.
+
+14. a
+Exception should be declared to be thrown in the default Constructor in inherited class: public Child() throws Exception {}
+
+15. b
+Cannot access instance variable age from static method main.
+
+16. a
+Will not compile : local variable y has to be initialised before using it.
+Replace if(x >= 10)   y = 2; with else y=2; and it will compile
+
+17. d
+Thread()  and Thread(Runnable r, String name) are valid constructors
+
+18. d
+squarecircle... There is no else statement
+
+19. a
+The default constructor initializes the instance variables declared in the class, the compiler does not create a default constructor if we define a constructor with parameters.
+
+20. c
+Autoboxing will take care of type Integer to int casting
+
+21. b
+First constructor of super is called and then child
+
+22. a
+; i < 5; i++ : is correct because i is already declared and initialized
+int j: arr : is the construct for foreach loop
+
+23. b
+big city. String is immutable.
+
+24. a
+m[0,7][1,7]5. There is no error in code.
+
+25. a
+Only public static void main(String... args) is correct main method
+
+26. d
+having same parameter but different return type does not make overloading. 
+
+27. d
+y=x in change() method does not affect 'a' and 'b' in main
+
+28. a
+Java can be used as stand alone application
+Java cannot be compiled to get an OS executable file
+
+29. b
+s3 and s4 belong to String pool and share the same object
+
+30. c
+A two dimensional array is an array of arrays
+
+31. a
+wait() should be used in synchronized block, else IllegalMonitorStateException is thrown
+
+32. c
+The access modifier to member data is private, methods provide for access and modification of data.
+
+33. a
+Hashtable implements java.util.Map
+
+34. d
+Object array1[]; and int[] array3; are correct
+
+35. a
+A and B are keywords. D is 'a' minus 'class'.
+
+36. d
+All of them are TRUE
+
+37. c
+Others have loss of precision
+
+38. c
+"a" and "cafe" are String, 'cafe' is wrong, true cannot be char
+
+39. d
+TreeSet implements SortedSet interface, and so elements are sorted and no duplicates
+
+40. c
+++x increments before usage and x++ uses first and then increments
+

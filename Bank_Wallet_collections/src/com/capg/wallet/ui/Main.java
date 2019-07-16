@@ -154,29 +154,9 @@ public class Main {
 		scan.close();
 		System.out.println("Bye!");
 	}
-
-	private void initialize() {
-		WalletService walletService = getWalletService();
-		try {
-			String acc1 = walletService.createAccount("poonam", "6234567890", "12/12/2018", "qwerty12");
-			String acc2 = walletService.createAccount("poonamchand", "8034567890", "12/12/1997", "qwerty12");
-			walletService.depositAmount(acc1, 50000, "qwerty12");
-			walletService.depositAmount(acc2, 10000, "qwerty12");
-			walletService.depositAmount(acc2, 1123, "qwerty12");
-			walletService.withdrawAmount(acc1, 1500, "qwerty12");
-			walletService.withdrawAmount(acc2, 1500, "qwerty12");
-			walletService.fundTransfer(acc1, acc2, 2000, "qwerty12");
-			walletService.fundTransfer(acc2, acc1, 200, "qwerty12");
-			walletService.fundTransfer(acc1, acc2, 3000, "qwerty12");
-			System.out.println("Testing account numbers are : " + acc1 + " and " + acc2);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
 	public static void main(String[] args) {
+		System.out.println("Testing account numbers are : SDA1234567890 and SDA1234567891 and password is : Qwerty123_");
 		Main obj = new Main();
-		obj.initialize();
 		obj.runApp();
 	}
 

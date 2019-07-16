@@ -75,7 +75,7 @@ public class WalletDaoImpl implements WalletDao {
 	 * Deposits the amount into the account.
 	 */
 	@Override
-	public void depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
+	public double depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
 			IncorrectPasswordException, InsufficientFundException, InvalidAmountException {
 		if (amount <= 0) {
 			throw new InvalidAmountException("Entered Amount is invalid " + amount);
@@ -84,13 +84,14 @@ public class WalletDaoImpl implements WalletDao {
 		Account account = getAccount(accountNum);
 		double newBalance = account.getBalance() + amount;
 		account.setBalance(newBalance);
+		return account.getBalance();
 	}
 
 	/*
 	 * Withdraws the amount from the account.
 	 */
 	@Override
-	public void withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
+	public double withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
 			AccountNotFoundException, IncorrectPasswordException, InsufficientFundException {
 		if (amount <= 0) {
 			throw new InvalidAmountException("Entered Amount is invalid " + amount);
@@ -102,14 +103,14 @@ public class WalletDaoImpl implements WalletDao {
 		}
 		double newBalance = account.getBalance() - amount;
 		account.setBalance(newBalance);
-
+		return account.getBalance();
 	}
 
 	/*
 	 * Transfers the amount from one account to another.
 	 */
 	@Override
-	public void fundTransfer(String accountNum, String password, String accountTo, double amount)
+	public double fundTransfer(String accountNum, String password, String accountTo, double amount)
 			throws InvalidAmountException, InsufficientFundException, AccountNotFoundException,
 			IncorrectPasswordException {
 		if (amount <= 0) {
@@ -123,7 +124,7 @@ public class WalletDaoImpl implements WalletDao {
 		}
 		account_rec.setBalance(account_rec.getBalance() + amount);
 		account.setBalance(account.getBalance() - amount);
-
+		return account.getBalance();
 	}
 
 	/*

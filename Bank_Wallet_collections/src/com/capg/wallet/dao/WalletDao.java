@@ -16,13 +16,13 @@ public interface WalletDao {
 
 	String createTransaction(Transaction tran);
 
-	void depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
+	double depositAmount(String accountNum, double amount, String password) throws AccountNotFoundException,
 			IncorrectPasswordException, InsufficientFundException, InvalidAmountException;
 
-	void withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
+	double withdrawAmount(String accountNum, double amount, String password) throws InvalidAmountException,
 			AccountNotFoundException, IncorrectPasswordException, InsufficientFundException;
 
-	void fundTransfer(String accountNum, String password, String accountTo, double amount) throws InvalidAmountException,
+	double fundTransfer(String accountNum, String password, String accountTo, double amount) throws InvalidAmountException,
 			InsufficientFundException, AccountNotFoundException, IncorrectPasswordException;
 
 	void printTransactions(String accountNum, String password)
