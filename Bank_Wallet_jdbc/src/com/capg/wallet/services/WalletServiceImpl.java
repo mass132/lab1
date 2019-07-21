@@ -44,7 +44,6 @@ public class WalletServiceImpl implements WalletService {
 		tran.setRemark(remark);
 		tran.setId(tranId);
 		tran.setAccountTo(accountTo);
-		System.out.println(tran);
 		tranId = walletDao.createTransaction(tran);
 		return tranId;
 	}

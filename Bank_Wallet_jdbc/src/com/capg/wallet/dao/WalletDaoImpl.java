@@ -1,5 +1,6 @@
 package com.capg.wallet.dao;
 
+import java.sql.BatchUpdateException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,8 +77,11 @@ public class WalletDaoImpl implements WalletDao {
 			stmt.addBatch();
 			stmt.executeBatch();
 			conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+		catch (BatchUpdateException e) {
+			
+		}catch (Exception e) {
+			//e.printStackTrace();
 
 		}
 
@@ -94,10 +98,11 @@ public class WalletDaoImpl implements WalletDao {
 		String query = "select * from bank_wallet_transaction where accfrom=\'" + accountNum + "\' OR accto=\'"
 				+ accountNum + "\'";
 		ResultSet rs = stmt.executeQuery(query);
-		Transaction t1 = new Transaction();
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
 
 		while (rs.next()) {
+			Transaction t1 = new Transaction();
 			t1.setAccountFrom(rs.getString(3));
 			t1.setAccountTo(rs.getString(4));
 			t1.setAmount(rs.getDouble(5));

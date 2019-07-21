@@ -61,8 +61,8 @@ public class Main {
 						| InvalidPasswordException e) {
 					System.out.println(e.getMessage());
 				} catch (Exception e) {
-					// System.out.println("Something went wrong!");
-					e.printStackTrace();
+					System.out.println("Something went wrong!");
+					//e.printStackTrace();
 				}
 				break;
 			case "2":
