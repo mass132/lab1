@@ -1,0 +1,5 @@
+SQL> select * from book_master
+  2  where book_pub_year between 2001 and 2004
+  3  and book_name like '%"&"%';
+
+no rows selected

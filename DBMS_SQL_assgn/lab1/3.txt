@@ -1,0 +1,4 @@
+SQL> select * from staff_master
+  2  where mgr_code is null;
+
+no rows selected

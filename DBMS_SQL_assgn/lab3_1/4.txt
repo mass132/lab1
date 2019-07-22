@@ -1,0 +1,3 @@
+SQL> select s1.staff_code,s1.staff_name,d1.dept_name,dm.design_name,b1.book_code,bm.book_name,b1.Book_issue_Date from staff_master s1 inner join department_master d1 on s1.dept_code=d1.dept_code inner join designation_master dm on s1.design_code=dm.design_code inner join book_transactions b1 on s1.staff_code=b1.staff_code inner join book_master bm on bm.book_code=b1.book_code;
+
+no rows selected

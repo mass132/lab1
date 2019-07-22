@@ -1,0 +1,4 @@
+SQL> select staff_code,staff_name,dept_name from staff_master s,department_master d where s.dept_code=d.dept_code and staff_code in (select staff_code from book_transactions group by staff_code having count(staff_code)>=2);
+
+no rows selected
+

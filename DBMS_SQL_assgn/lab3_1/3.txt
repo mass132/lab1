@@ -1,0 +1,4 @@
+SQL>  select s1.student_code,s1.student_name,b1.book_code,bm.book_name from student_master s1 inner join book_transactions b1 on s1.student_code=b1.student_code inner join book_master bm on bm.book_code=b1.book_code and b1.Book_expected_return_date=sysdate;
+
+no rows selected
+

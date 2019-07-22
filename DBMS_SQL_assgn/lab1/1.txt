@@ -1,0 +1,9 @@
+SQL> select staff_name,design_code from staff_master
+  2  where hiredate>'01-JAN-2003'
+  3  and staff_sal between 12000 and 25000;
+
+STAFF_NAME                                         DESIGN_CODE                  
+-------------------------------------------------- -----------                  
+Arvind                                                     102                  
+Raviraj                                                    102                  
+Rahul                                                      102                  

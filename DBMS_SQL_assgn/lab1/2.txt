@@ -1,0 +1,9 @@
+SQL> select staff_code,staff_name,dept_code from staff_master
+  2  where  (MONTHS_BETWEEN(SYSDATE,HIREDATE))>=216
+  3  order by hiredate desc;
+
+STAFF_CODE STAFF_NAME                                          DEPT_CODE        
+---------- -------------------------------------------------- ----------        
+    100006 Allen                                                      30        
+    100004 Anil                                                       20        
+    100005 John                                                       10        

@@ -1,0 +1,3 @@
+SQL>  select deptno,sum(sal) from emp where job!='MANAGER' group by deptno having sum(sal)>20000;
+
+no rows selected

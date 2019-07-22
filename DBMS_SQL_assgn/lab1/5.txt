@@ -1,0 +1,17 @@
+SQL> select staff_name from staff_master
+  2  where STAFF_NAME LIKE '%_%';
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+Arvind                                                                          
+Shyam                                                                           
+Mohan                                                                           
+Anil                                                                            
+John                                                                            
+Allen                                                                           
+Smith                                                                           
+Raviraj                                                                         
+Rahul                                                                           
+Ram                                                                             
+
+10 rows selected.
