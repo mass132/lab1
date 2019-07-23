@@ -1,0 +1,7 @@
+SQL> rollback to sp;
+
+Rollback complete.
+
+SQL> commit;
+
+Commit complete.

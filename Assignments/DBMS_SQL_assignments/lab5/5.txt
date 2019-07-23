@@ -1,0 +1,3 @@
+SQL>  update employee set empno=7788 where empno=7698;
+
+1 row updated.

@@ -1,0 +1,3 @@
+SQL> savepoint sp;
+
+Savepoint created.

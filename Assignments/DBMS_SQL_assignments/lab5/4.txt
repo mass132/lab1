@@ -1,0 +1,5 @@
+
+
+SQL> delete from department_master where dept_name='SALES';
+
+0 rows deleted.

@@ -1,3 +1,0 @@
-program closed
-sqlunrecoverableexception
-remove xyz wallet from menu
